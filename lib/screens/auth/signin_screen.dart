@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 
 class SigninScreen extends StatefulWidget {
@@ -8,21 +9,70 @@ class SigninScreen extends StatefulWidget {
 }
 
 class _SigninScreenState extends State<SigninScreen> {
+  //Login Function
+  void login(){
+  const snackBar = SnackBar(
+                  /// need to set following properties for best effect of awesome_snackbar_content
+                  elevation: 0,
+                  behavior: SnackBarBehavior.floating,
+                  backgroundColor: Colors.transparent,
+                  content: AwesomeSnackbarContent(
+                    title: 'On Snap!',
+                    message:
+                        'This is an example error message that will be shown in the body of snackbar!',
+
+                    /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+                    contentType: ContentType.failure,
+                  ),
+                );
+
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(snackBar);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          //Logo
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            //Logo
+          Icon(Icons.person, size: 90 ,),
 
-          //Welcome  Message
+          const SizedBox(height: 10),
+        
+            //Welcome  Message
+          Text('Hello World'),
+        const SizedBox(height: 10),
 
-          //Username Textfield
+            //Username Textfield
+          TextField(
+            decoration: InputDecoration(
+              labelText: "username",
+              border: OutlineInputBorder()
+              
+            ),
+          ),
+           const SizedBox(height: 20),
 
-          //Sign In Button
+          // Pasword TextFeild
+            TextField( 
+            decoration: InputDecoration(
+              labelText: "password",
+              border: OutlineInputBorder()
+            ),
+          ),
+         const SizedBox(height: 20),
 
-
-        ],
+            //Sign In Button
+            SizedBox(
+              child: ElevatedButton(onPressed: login ,
+              child: Text("Sign in"))
+            )
+          ],
+        ),
       ),
     );
   }
